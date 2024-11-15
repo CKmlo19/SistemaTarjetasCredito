@@ -83,6 +83,45 @@ namespace SistemaTarjetasCredito.Data
             return listaEstados;
         }
 
+        public List<SubestadoCuentaModel> ObtenerSubestadosCuentaTCA(int idTCA)
+        {
+            var listaSubestados = new List<SubestadoCuentaModel>();
+
+            var cn = new Conexion();
+
+            using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+            {
+                conexion.Open();
+
+                SqlCommand cmd = new SqlCommand("dbo.ObtenerSubestadosCuentaTCA", conexion)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                cmd.Parameters.AddWithValue("@idTCA", idTCA);
+
+                using (var dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        listaSubestados.Add(new SubestadoCuentaModel
+                        {
+                            FechaEstadoCuenta = Convert.ToDateTime(dr["FechaEstadoCuenta"]),
+                            CantidadOperacionesATM = Convert.ToInt32(dr["CantidadOperacionesATM"]),
+                            CantidadOperacionesVentanilla = Convert.ToInt32(dr["CantidadOperacionesVentanilla"]),
+                            CantidadCompras = Convert.ToInt32(dr["CantidadCompras"]),
+                            SumaCompras = Convert.ToDecimal(dr["SumaCompras"]),
+                            CantidadRetiros = Convert.ToInt32(dr["CantidadRetiros"]),
+                            SumaRetiros = Convert.ToDecimal(dr["SumaRetiros"])
+                        });
+                    }
+                }
+            }
+
+            return listaSubestados;
+        }
+
+
         public List<MovimientoModel> ObtenerMovimientosPorEstado(int idTarjetaFisica)
         {
             var listaMovimientos = new List<MovimientoModel>();
@@ -156,6 +195,8 @@ namespace SistemaTarjetasCredito.Data
 
             return listaTarjetas;
         }
+
+
     }
 }
 

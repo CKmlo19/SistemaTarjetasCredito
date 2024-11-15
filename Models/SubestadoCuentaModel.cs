@@ -4,6 +4,7 @@ namespace SistemaTarjetasCredito.Models
 {
     public class SubestadoCuentaModel
     {
+        public int Id { get; set; }
         public DateTime FechaEstadoCuenta { get; set; }
         public int CantidadOperacionesATM { get; set; }
         public int CantidadOperacionesVentanilla { get; set; }

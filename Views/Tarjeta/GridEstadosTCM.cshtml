@@ -1,0 +1,39 @@
+﻿@model List<SistemaTarjetasCredito.Models.EstadoCuentaModel>
+
+<h2>Estados de Cuenta (TCM)</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fecha del Estado de Cuenta</th>
+            <th>Pago Mínimo</th>
+            <th>Pago de Contado</th>
+            <th>Intereses Corrientes</th>
+            <th>Intereses Moratorios</th>
+            <th>Cantidad de Operaciones ATM</th>
+            <th>Cantidad de Operaciones en Ventanilla</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var estado in Model)
+        {
+            <tr>
+                <td>@estado.FechaEstadoCuenta.ToString("dd/MM/yyyy")</td>
+                <td>@estado.PagoMinimo.ToString("C")</td>
+                <td>@estado.PagoContado.ToString("C")</td>
+                <td>@estado.InteresesCorrientes.ToString("C")</td>
+                <td>@estado.InteresesMoratorios.ToString("C")</td>
+                <td>@estado.CantidadOperacionesATM</td>
+                <td>@estado.CantidadOperacionesVentanilla</td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("VerMovimientosTCM", "Tarjeta", new { idTarjetaFisica = estado.Id })">
+                        Ver Movimientos
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-outline-dark" href="@Url.Action("MisTarjetas", "Tarjeta")">Regresar a Mis Tarjetas</a>

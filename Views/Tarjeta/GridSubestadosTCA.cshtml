@@ -1,0 +1,39 @@
+﻿@model List<SistemaTarjetasCredito.Models.SubestadoCuentaModel>
+
+<h2>Subestados de Cuenta (TCA)</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fecha del Estado de Cuenta</th>
+            <th>Cantidad de Operaciones ATM</th>
+            <th>Cantidad de Operaciones en Ventanilla</th>
+            <th>Cantidad de Compras</th>
+            <th>Suma de las Compras</th>
+            <th>Cantidad de Retiros</th>
+            <th>Suma de los Retiros</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var subestado in Model)
+        {
+            <tr>
+                <td>@subestado.FechaEstadoCuenta.ToString("dd/MM/yyyy")</td>
+                <td>@subestado.CantidadOperacionesATM</td>
+                <td>@subestado.CantidadOperacionesVentanilla</td>
+                <td>@subestado.CantidadCompras</td>
+                <td>@subestado.SumaCompras.ToString("C")</td>
+                <td>@subestado.CantidadRetiros</td>
+                <td>@subestado.SumaRetiros.ToString("C")</td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("VerMovimientos", "Tarjeta", new { idTarjetaFisica = subestado.Id })">
+                        Ver Movimientos
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-outline-dark" href="@Url.Action("MisTarjetas", "Tarjeta")">Regresar a Mis Tarjetas</a>

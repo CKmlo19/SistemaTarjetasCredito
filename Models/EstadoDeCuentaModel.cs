@@ -8,6 +8,7 @@ namespace SistemaTarjetasCredito.Models
         public int IdTCM { get; set; }
         public decimal SaldoActual { get; set; }
         public decimal PagoMinimo { get; set; }
+        public decimal PagoContado { get; set; }
         public DateTime FechaEstadoCuenta { get; set; }
         public decimal InteresesCorrientes { get; set; }
         public decimal InteresesMoratorios { get; set; }
