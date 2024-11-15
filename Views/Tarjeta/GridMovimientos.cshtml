@@ -1,0 +1,30 @@
+﻿@model List<SistemaTarjetasCredito.Models.MovimientoModel>
+
+<h2>Movimientos</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fecha de Operación</th>
+            <th>Tipo de Movimiento</th>
+            <th>Descripción</th>
+            <th>Referencia</th>
+            <th>Monto</th>
+            <th>Nuevo Saldo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movimiento in Model)
+        {
+            <tr>
+                <td>@movimiento.FechaOperacion.ToString("dd/MM/yyyy")</td>
+                <td>@movimiento.TipoMovimiento</td>
+                <td>@movimiento.Descripcion</td>
+                <td>@movimiento.Referencia</td>
+                <td>@movimiento.Monto.ToString("C")</td>
+                <td>@movimiento.NuevoSaldo.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-outline-dark" href="@Url.Action("ListarTodas", "Tarjeta")">Regresar a la Lista de Tarjetas</a>

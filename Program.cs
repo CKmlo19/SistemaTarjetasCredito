@@ -10,13 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 //builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(option =>
-    {
-        option.LoginPath = "/Usuario/Login";
-        option.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-        option.AccessDeniedPath = "/Usuario/Login";
-    });
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//    .AddCookie(option =>
+//    {
+//        option.LoginPath = "/Usuario/Login";
+//        option.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+//        option.AccessDeniedPath = "/Usuario/Login";
+//    });
 
 builder.Services.AddSession(options =>
 {
@@ -46,6 +46,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Usuario}/{action=Login}/{id?}");
+    pattern: "{controller=Tarjeta}/{action=MisTarjetas}/{id?}");
 
 app.Run();

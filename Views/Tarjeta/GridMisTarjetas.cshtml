@@ -1,0 +1,24 @@
+﻿@model List<SistemaTarjetasCredito.Models.TarjetaModel>
+
+<h2>Mis Tarjetas</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Número de Tarjeta</th>
+            <th>Estado</th>
+            <th>Tipo de Cuenta</th>
+            <th>Fecha de Vencimiento</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tarjeta in Model)
+        {
+            <tr>
+                <td>@tarjeta.NumeroTarjeta</td>
+                <td>@tarjeta.Estado</td>
+                <td>@tarjeta.TipoCuenta</td>
+                <td>@tarjeta.FechaVencimiento.ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>

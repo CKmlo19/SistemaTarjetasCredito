@@ -1,0 +1,33 @@
+﻿@model List<SistemaTarjetasCredito.Models.TarjetaModel>
+
+<h2>Lista de Todas las Tarjetas</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Número de Tarjeta</th>
+            <th>Estado</th>
+            <th>Tipo de Cuenta</th>
+            <th>Fecha de Vencimiento</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tarjeta in Model)
+        {
+            <tr>
+                <td>@tarjeta.NumeroTarjeta</td>
+                <td>@tarjeta.Estado</td>
+                <td>@tarjeta.TipoCuenta</td>
+                <td>@tarjeta.FechaVencimiento.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("VerEstados", "Tarjeta", new { idTarjeta = tarjeta.Id })">
+                        Ver Estado de Cuenta
+                    </a>
+                    <a class="btn btn-secondary" href="@Url.Action("VerMovimientos", "Tarjeta", new { idTarjetaFisica = tarjeta.Id })">
+                        Ver Movimientos
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

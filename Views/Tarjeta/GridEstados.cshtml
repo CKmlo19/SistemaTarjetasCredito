@@ -1,0 +1,32 @@
+﻿@model List<SistemaTarjetasCredito.Models.EstadoCuentaModel>
+
+<h2>Estados de Cuenta</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Pago Mínimo</th>
+            <th>Saldo Actual</th>
+            <th>Intereses Corrientes</th>
+            <th>Intereses Moratorios</th>
+            <th>Operaciones ATM</th>
+            <th>Operaciones Ventanilla</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var estado in Model)
+        {
+            <tr>
+                <td>@estado.FechaEstadoCuenta.ToString("dd/MM/yyyy")</td>
+                <td>@estado.PagoMinimo.ToString("C")</td>
+                <td>@estado.SaldoActual.ToString("C")</td>
+                <td>@estado.InteresesCorrientes.ToString("C")</td>
+                <td>@estado.InteresesMoratorios.ToString("C")</td>
+                <td>@estado.CantidadOperacionesATM</td>
+                <td>@estado.CantidadOperacionesVentanilla</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-outline-dark" href="@Url.Action("ListarTodas", "Tarjeta")">Regresar a la Lista de Tarjetas</a>
