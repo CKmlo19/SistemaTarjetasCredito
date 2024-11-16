@@ -17,12 +17,15 @@
 <!-- Formulario de inicio de sesión -->
 <form asp-controller="Usuario" asp-action="Login" method="post">
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Usuario</label>
-        <input type="text" class="form-control" asp-for="username">
+        <label for="username" class="form-label">Usuario</label>
+        <input type="text" class="form-control" asp-for="username" id="username" />
+        <span asp-validation-for="username" class="text-danger"></span>
     </div>
     <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" asp-for="password">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" asp-for="password" id="password" />
+        <span asp-validation-for="password" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Ingresar</button>
 </form>
+

@@ -20,10 +20,10 @@
                 <td>@tarjeta.TipoCuenta</td>
                 <td>@tarjeta.FechaVencimiento.ToString("dd/MM/yyyy")</td>
                 <td>
-                    <a class="btn btn-primary" href="@Url.Action("VerEstados", "Tarjeta", new { idTarjeta = tarjeta.Id })">
+                    <a class="btn btn-primary" href="@Url.Action("VerTodosLosEstados", "Tarjeta", new { idTarjeta = tarjeta.Id })">
                         Ver Estado de Cuenta
                     </a>
-                    <a class="btn btn-secondary" href="@Url.Action("VerMovimientos", "Tarjeta", new { idTarjetaFisica = tarjeta.Id })">
+                    <a class="btn btn-secondary" href="@Url.Action("VerTodosLosMovimientos", "Tarjeta", new { idTarjetaFisica = tarjeta.Id })">
                         Ver Movimientos
                     </a>
                 </td>

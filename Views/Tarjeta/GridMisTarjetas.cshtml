@@ -24,13 +24,13 @@
                     <div class="d-flex flex-column">
                         @if (tarjeta.TipoCuenta == "TCM")
                         {
-                            <a class="btn btn-primary mb-2" href="@Url.Action("VerEstados", "Tarjeta", new { idTarjeta = tarjeta.Id, tipoCuenta = tarjeta.TipoCuenta })">
+                            <a class="btn btn-primary mb-2" href="@Url.Action("estadoYsubEstados", "Tarjeta", new { idTarjeta = tarjeta.Id, tipoCuenta = tarjeta.TipoCuenta })">
                                 Ver Estados de Cuenta
                             </a>
                         }
                         else if (tarjeta.TipoCuenta == "TCA")
                         {
-                            <a class="btn btn-secondary mb-2" href="@Url.Action("VerEstados", "Tarjeta", new { idTarjeta = tarjeta.Id, tipoCuenta = tarjeta.TipoCuenta })">
+                            <a class="btn btn-secondary mb-2" href="@Url.Action("estadoYsubEstados", "Tarjeta", new { idTarjeta = tarjeta.Id, tipoCuenta = tarjeta.TipoCuenta })">
                                 Ver Subestados de Cuenta
                             </a>
                         }

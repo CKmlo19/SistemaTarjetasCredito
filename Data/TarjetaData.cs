@@ -196,6 +196,95 @@ namespace SistemaTarjetasCredito.Data
             return listaTarjetas;
         }
 
+        public int ObtenerIdTipoUsuario(string username, string password)
+        {
+            int idTipoUsuario = -1; // Valor por defecto en caso de no encontrar datos
+
+            try
+            {
+                var cn = new Conexion();
+
+                // Abre la conexión
+                using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+                {
+                    conexion.Open();
+
+                    // Llama al procedimiento almacenado
+                    SqlCommand cmd = new SqlCommand("dbo.ObtenerIdTipoUsuario", conexion);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Agrega los parámetros de entrada
+                    cmd.Parameters.AddWithValue("@Nombre", username);
+                    cmd.Parameters.AddWithValue("@Password", password);
+
+                    // Ejecuta el procedimiento almacenado
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        // Si hay datos, asigna el idTipoUsuario
+                        if (dr.Read())
+                        {
+                            idTipoUsuario = (int)dr["idTipoUsuario"];
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                // Maneja errores y devuelve -1 en caso de fallo
+                Console.WriteLine($"Error: {e.Message}");
+                idTipoUsuario = -1;
+            }
+
+            return idTipoUsuario;
+        }
+
+        public int ObtenerIdUsuario(string username, string password)
+        {
+            int idUsuario = -1; // Valor por defecto si no se encuentra el usuario o ocurre un error
+
+            try
+            {
+                var cn = new Conexion();
+
+                // Abre la conexión
+                using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+                {
+                    conexion.Open();
+
+                    // Llama al procedimiento almacenado
+                    SqlCommand cmd = new SqlCommand("dbo.ObtenerIdUsuario", conexion);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Agrega los parámetros de entrada
+                    cmd.Parameters.AddWithValue("@Nombre", username);
+                    cmd.Parameters.AddWithValue("@Password", password);
+
+                    // Parámetro de salida para el id del usuario
+                    SqlParameter outputParam = new SqlParameter("@OutId", SqlDbType.Int)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(outputParam);
+
+                    // Ejecuta el procedimiento almacenado
+                    cmd.ExecuteNonQuery();
+
+                    // Obtiene el valor del parámetro de salida
+                    idUsuario = (int)cmd.Parameters["@OutId"].Value;
+                }
+            }
+            catch (Exception e)
+            {
+                // Maneja errores y deja el idUsuario con el valor por defecto (-1)
+                Console.WriteLine($"Error: {e.Message}");
+            }
+
+            return idUsuario;
+        }
+
+
+
+
 
     }
 }

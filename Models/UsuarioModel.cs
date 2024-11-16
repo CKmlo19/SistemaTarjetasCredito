@@ -12,6 +12,8 @@ namespace SistemaTarjetasCredito.Models
         [Required(ErrorMessage = "Campo requerido")]
         public string? password { get; set; }
         public string? PostIP { get; set; }
+        public int idTipoUsuario { get; internal set; }
+
         private static UsuarioModel _instance;
         public static UsuarioModel GetInstance()
         {

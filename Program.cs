@@ -3,20 +3,22 @@ using SistemaTarjetasCredito.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Registrar el servicio EmpleadoData como Scoped (puede ser Singleton o Transient según la necesidad)
-//builder.Services.AddScoped<EmpleadoData>();
+//Registrar el servicio EmpleadoData como Scoped (puede ser Singleton o Transient según la necesidad)
+builder.Services.AddScoped<TarjetaData>();
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-//builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//    .AddCookie(option =>
-//    {
-//        option.LoginPath = "/Usuario/Login";
-//        option.ExpireTimeSpan = TimeSpan.FromMinutes(10);
-//        option.AccessDeniedPath = "/Usuario/Login";
-//    });
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(option =>
+    {
+        option.LoginPath = "/Usuario/Login"; // Ruta para iniciar sesión
+         
+
+    });
 
 builder.Services.AddSession(options =>
 {
@@ -34,18 +36,22 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseDeveloperExceptionPage();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseSession(); // Habilitar sesiones
-
+app.UseSession(); // Siempre antes de Authentication
 app.UseAuthentication();
 app.UseAuthorization();
 
+
+
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Tarjeta}/{action=MisTarjetas}/{id?}");
+    pattern: "{controller=Usuario}/{action=Login}/{id?}");
 
 app.Run();

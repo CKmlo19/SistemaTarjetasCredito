@@ -9,46 +9,26 @@ namespace SistemaTarjetasCredito.Controllers
     {
         private readonly TarjetaData _tarjetaData = new TarjetaData();
 
-        //// Acción para ver la lista de todas las tarjetas
-        //public ActionResult ListarTodas()
-        //{
-        //    List<TarjetaModel> tarjetas = _tarjetaData.ListarTodasLasTarjetas();
-        //    return View("GridTodasTarjetas", tarjetas); 
-        //}
 
-        //// Acción para ver los estados de cuenta
-        //public ActionResult VerEstados(int idTarjeta)
-        //{
-        //    var estadosCuenta = _tarjetaData.ObtenerEstadosCuentaTCM(idTarjeta);
-        //    ViewBag.IdTarjeta = idTarjeta;
-        //    return View("GridEstados", estadosCuenta);
-        //}
-
-        //// Acción para ver los movimientos
-        //public ActionResult VerMovimientos(int idTarjetaFisica)
-        //{
-        //    var movimientos = _tarjetaData.ObtenerMovimientosPorEstado(idTarjetaFisica);
-        //    ViewBag.IdTarjetaFisica = idTarjetaFisica;
-        //    return View("GridMovimientos", movimientos);
-        //}
-
-
-        // Acción para listar las tarjetas del usuario actual (Tarjeta Habiente)
-        public ActionResult MisTarjetas()
+        // Acción para ver los estados de cuenta en modo Administrador
+        public ActionResult VerTodosLosEstados(int idTarjeta)
         {
-            int idUsuario = ObtenerIdUsuarioActual(); // Método para obtener el id del usuario autenticado
-            List<TarjetaModel> tarjetas = _tarjetaData.ListarTarjetasPorUsuario(idUsuario);
-            return View("GridMisTarjetas", tarjetas);
+            var estadosCuenta = _tarjetaData.ObtenerEstadosCuentaTCM(idTarjeta);
+            ViewBag.IdTarjeta = idTarjeta;
+            return View("/Views/Tarjeta/GridEstados.cshtml", estadosCuenta);
         }
 
-        // Método auxiliar para obtener el id del usuario actual
-        private int ObtenerIdUsuarioActual()
+
+        // Acción para ver los movimientos
+        public ActionResult VerTodosLosMovimientos(int idTarjetaFisica)
         {
-            // Aquí deberías obtener el id del usuario actual de la sesión o contexto de autenticación
-            return 172; // Ejemplo: Retorna un id de prueba (reemplaza esto con el código real)
+            var movimientos = _tarjetaData.ObtenerMovimientosPorEstado(idTarjetaFisica);
+            ViewBag.IdTarjetaFisica = idTarjetaFisica;
+            return View("GridMovimientos", movimientos);
         }
 
-        public ActionResult VerEstados(int idTarjeta, string tipoCuenta)
+
+        public ActionResult estadoYsubEstados(int idTarjeta, string tipoCuenta)
         {
             if (tipoCuenta == "TCM")
             {
@@ -63,7 +43,6 @@ namespace SistemaTarjetasCredito.Controllers
 
             return RedirectToAction("MisTarjetas"); // Redirige a "Mis Tarjetas" si no coincide el tipo de cuenta
         }
-
 
         public ActionResult VerMovimientos(int idTarjetaFisica)
         {
